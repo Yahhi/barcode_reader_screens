@@ -132,6 +132,9 @@ class _BarcodeLibState extends State<BarcodeLib> with WidgetsBindingObserver {
   }
 
   void _showInactivityDialog(bool event) async {
+    setState(() {
+      camState = false;
+    });
     showDialog<bool>(
         context: context,
         builder: (BuildContext context) {
@@ -142,8 +145,6 @@ class _BarcodeLibState extends State<BarcodeLib> with WidgetsBindingObserver {
                 child: new Text("Retry"),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  viewModel.startTimer();
-                  camState = true;
                 },
               ),
               new FlatButton(
@@ -155,7 +156,12 @@ class _BarcodeLibState extends State<BarcodeLib> with WidgetsBindingObserver {
               ),
             ],
           );
-        });
+        }).then((_) {
+      setState(() {
+        camState = true;
+      });
+      viewModel.startTimer();
+    });
   }
 
   @override

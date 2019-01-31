@@ -37,9 +37,11 @@ class BarcodeLibViewModel {
 
   void checkCode(String code) {
     _backendCheck.add(code);
+    //postRequest(code);
   }
 
   /*Future<http.Response> postRequest(String str) async {
+    _networkRequestInProgress.add(true);
     var url = 'http://192.168.88.110:4567/barcodeLookup';
     var body = jsonEncode({'barcodeNum': str});
 
